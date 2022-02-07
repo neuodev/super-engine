@@ -14,7 +14,7 @@ describe("Cart", () => {
     cy.addToCard();
     cy.get("#cartur").click();
     cy.get("#tbodyid > tr").should("have.length", 1);
+    cy.contains("Delete").first().click();
+    cy.get("#tbodyid > tr").should("have.length", 0);
   });
-
-  it("Place an order", () => {});
 });
