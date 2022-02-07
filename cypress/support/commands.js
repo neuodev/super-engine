@@ -23,3 +23,19 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("fillLoginForm", (username, password) => {
+  cy.get('a[data-target="#logInModal"]').click();
+  cy.get("#loginusername").type(username, {
+    force: true,
+  });
+  cy.get("#loginpassword").type(password, {
+    force: true,
+  });
+});
+
+Cypress.Commands.add("login", (username, password) => {
+  cy.fillLoginForm(username, password);
+  cy.get("#logInModal .btn-primary").click({ force: true });
+  cy.get("a[id=nameofuser]").should("have.text", `Welcome ${username}`);
+});
