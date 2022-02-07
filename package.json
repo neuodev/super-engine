@@ -4,7 +4,9 @@
   "description": "e2e testing for https://www.saucedemo.com/ with Cypress",
   "main": "index.js",
   "scripts": {
-    "cy:run": "cypress run"
+    "cy:run:headless": "cypress run --headless",
+    "cy:run:headed": "cypress run --browser chrome --headed",
+    "cy:edge": "npm run cy:run --browser edge"
   },
   "keywords": [
     "e2e",
