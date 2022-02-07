@@ -4,7 +4,7 @@
   "description": "e2e testing for https://www.saucedemo.com/ with Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:run": "cypress run"
   },
   "keywords": [
     "e2e",
