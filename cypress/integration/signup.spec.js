@@ -2,20 +2,31 @@
 
 const URL = "https://www.demoblaze.com/index.html";
 
-describe.only("Sign up process", () => {
+describe("Sign up process", () => {
   beforeEach(() => {
     cy.visit(URL);
   });
 
-  it("Should be able to sign up with non existing username and password", () => {
-    cy.get("#signin2").click();
-    cy.wait(1000);
+  it("Sign up new user", () => {
     const random = Math.floor(Math.random() * 1000);
-    const user = `__USER__${random}`;
+    const username = `__USER__${random}`;
     const password = "123456";
-    cy.get("#sign-username").type(user);
-    cy.get("#sign-password").type(password);
+    cy.signup(username, password);
+    cy.login(username, password);
+  });
+
+  it.only("Click signup without filling the form", () => {
+    cy.get("#signin2").click();
     cy.get("#signInModal .btn-primary").click({ force: true });
-    cy.login(user, password);
+    cy.on("window:alert", (txt) => {
+      expect(txt).to.be.eq("Please fill out Username and Password.");
+    });
+  });
+
+  it("Register existing user", () => {
+    cy.signup("greenland", "123456");
+    cy.on("window:alert", (txt) => {
+      expect(txt).to.be.eq("This user already exist.");
+    });
   });
 });

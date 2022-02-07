@@ -39,3 +39,15 @@ Cypress.Commands.add("login", (username, password) => {
   cy.get("#logInModal .btn-primary").click({ force: true });
   cy.get("a[id=nameofuser]").should("have.text", `Welcome ${username}`);
 });
+
+Cypress.Commands.add("fillSignUpForm", (username, password) => {
+  cy.get("#signin2").click();
+  cy.wait(1000);
+  cy.get("#sign-username").type(username);
+  cy.get("#sign-password").type(password);
+});
+
+Cypress.Commands.add("signup", (username, password) => {
+  cy.fillSignUpForm(username, password);
+  cy.get("#signInModal .btn-primary").click({ force: true });
+});
