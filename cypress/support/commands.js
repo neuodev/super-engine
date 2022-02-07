@@ -51,3 +51,11 @@ Cypress.Commands.add("signup", (username, password) => {
   cy.fillSignUpForm(username, password);
   cy.get("#signInModal .btn-primary").click({ force: true });
 });
+
+Cypress.Commands.add("addToCard", () => {
+  cy.get(".card > a").first().click();
+  cy.get(".btn-success").click();
+  cy.on("window:alert", (txt) => {
+    expect(txt).to.be.eq("Product added");
+  });
+});
